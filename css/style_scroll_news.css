@@ -1,0 +1,354 @@
+/* ===== 共通スタイル ===== */
+body {
+  margin: 0; /* ブラウザのデフォルト余白を消して、全画面表示を可能にする */
+  font-family: 'Segoe UI', sans-serif; /* サイト全体の基本フォントを設定。Segoe UI がなければ sans-serif */
+  scroll-behavior: smooth; /* スクロールを滑らかにする（アンカーリンクなどで使用） */
+  background: #fff; /* 背景色を白に設定 */
+  color: #000; /* 文字色を黒に設定 */
+  display: flex; /* 子要素（header, main, footerなど）をflexレイアウトにする */
+  flex-direction: column; /* 子要素を縦方向（上から下）に並べる */
+  min-height: 100vh; /* ビューポートの高さを最低限の高さにする（フッターを画面下に固定しやすくなる） */
+}
+
+header {
+  background: #222; /* ヘッダー背景を濃いグレーに設定 */
+  color: white; /* ヘッダー内の文字色を白に */
+  padding: 1rem; /* 上下左右に1remの余白を確保 */
+  display: flex; /* ロゴとメニューを横並びに配置 */
+  justify-content: space-between; /* ロゴとメニューを左右に離す配置 */
+  align-items: center; /* 垂直方向の中央揃え */
+  position: relative; /* 子要素（ハンバーガーメニューなど）で絶対位置を使うために必要 */
+}
+
+.logo {
+  font-weight: bold; /* ロゴの文字を太く */
+  font-size: 3.0rem; /* 大きめのフォントサイズ */
+  font-family: 'Noto Sans JP', 'Segoe UI', sans-serif; /* 日本語と英語の両方に対応したフォント指定 */
+  color: #ffffff; /* ロゴ文字を白に */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* ロゴに黒系の影をつけて視認性UP */
+  letter-spacing: 1px; /* 文字間隔を少し広くして読みやすく */
+}
+
+.nav-menu {
+  list-style: none; /* liの前の黒丸を消す */
+  display: flex; /* メニューを横並びにする */
+  gap: 1rem; /* 各メニューの間に1remのスペースを作る */
+  margin: 0; /* 上下の余白を消去 */
+}
+
+.nav-menu li a {
+  color: white; /* リンク文字を白に */
+  text-decoration: none; /* 下線を消す */
+}
+
+.hamburger {
+  display: none; /* デフォルトでは非表示（スマホ用表示切替などで使う） */
+  font-size: 2rem; /* ハンバーガーアイコンのサイズ */
+  cursor: pointer; /* カーソルを「ポインタ」に（クリックできる感を出す） */
+}
+
+main {
+  padding: 2rem; /* main領域全体に余白をつける */
+  flex: 1; /* flexの残り領域を全て使う（フッターを下に押し出す効果） */
+}
+
+.site-footer {
+  background: #000; /* フッターの背景を黒に */
+  color: white; /* フッター文字を白に */
+  text-align: center; /* 文字を中央寄せ */
+  padding: 1rem; /* 全体に余白 */
+}
+
+/* スクロール時にふわっと表示されるアニメーションの初期状態 */
+.fade-in {
+  opacity: 0; /* 非表示状態から開始 */
+  transform: translateY(40px); /* 下から40pxずらして開始 */
+  transition: all 0.6s ease-out; /* すべてのプロパティを0.6秒かけてゆっくり変化 */
+}
+
+/* 表示状態になったときのスタイル */
+.fade-in.visible {
+  opacity: 1; /* 表示状態へ */
+  transform: translateY(0); /* 元の位置に戻す */
+}
+
+/* ホーム画面専用の背景と文字装飾 */
+body.home-bg {
+  background: url("../images/background.png") no-repeat center center fixed; /* 背景画像を中央固定で表示 */
+  background-size: cover; /* 画像を画面いっぱいに表示（縦横比維持） */
+  color: white; /* 文字色を白に上書き */
+  text-shadow: 1px 1px 2px rgb(0, 0, 0); /* 黒の薄い文字影で視認性UP */
+}
+
+.home-title {
+  font-size: 40px; /* タイトルのサイズ */
+  color: #eef1f5; /* 明るい白系の文字色 */
+  margin-bottom: 1rem; /* 下に余白 */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* 文字に淡い影を付ける */
+}
+
+.home-greeting {
+  font-size: 25px; /* あいさつ文のサイズ */
+  color: #f3eeee; /* やや明るめのグレー白 */
+  line-height: 1.6; /* 行間を1.6倍にして読みやすく */
+}
+
+/* 画像ギャラリーのグリッド表示設定 */
+.gallery {
+  display: grid; /* CSSグリッドを使用 */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 各アイテムの幅が最小220pxで自動調整 */
+  gap: 1rem; /* グリッド間のスペース */
+  margin-top: 1rem; /* ギャラリー上部に余白 */
+}
+
+.gallery-item {
+  background: white; /* 背景を白に */
+  padding: 1rem; /* 内側余白 */
+  border: 1px solid #ddd; /* 薄い枠線をつける */
+  text-align: center; /* 中央揃え */
+  opacity: 0; /* アニメーション用：初期は透明 */
+  transform: translateY(40px); /* アニメーション用：下から開始 */
+  transition: all 0.6s ease-out; /* アニメーション効果 */
+}
+
+.gallery-item.visible {
+  opacity: 1; /* 表示状態にする */
+  transform: translateY(0); /* 元の位置に戻す */
+}
+
+/* お知らせフレーム全体 */
+.news-frame {
+  position: fixed; /* 常に画面の一定位置に表示 */
+  bottom: 100px; /* 画面下から100pxの位置 */
+  left: 20px; /* 左から20pxの位置 */
+  width: 500px; /* 横幅 */
+  max-height: 240px; /* 最大高さ（中が多い時のスクロール対応） */
+  background: rgba(255, 255, 255, 0.95); /* 半透明の白背景 */
+  border: 2px solid #ccc; /* 枠線 */
+  border-radius: 8px; /* 角丸 */
+  padding: 1rem; /* 内側余白 */
+  z-index: 1000; /* 最前面に表示するための重なり順 */
+  box-shadow: 0 0 10px rgba(0,0,0,0.2); /* 影をつけて浮かび上がる感じに */
+}
+
+/* お知らせ内のスクロール部分 */
+.news-scroll {
+  max-height: 180px; /* 最大高さ */
+  overflow-y: auto; /* 垂直方向にスクロール可 */
+  border-top: 1px solid #ddd; /* 上の区切り線 */
+  margin-top: 1rem; /* 上に余白 */
+  padding-right: 1rem; /* スクロールバーが被らないように右に余白 */
+}
+
+/* お知らせリストの基本設定 */
+.news-list {
+  list-style: none; /* 黒丸を消す */
+  padding: 0; /* 内側余白をゼロに */
+  margin: 0; /* 外側余白もゼロに */
+}
+
+.news-list li {
+  padding: 0.5rem 0; /* 上下に余白 */
+  border-bottom: 1px solid #eee; /* 下線で区切る */
+}
+
+
+/* ==============================
+   レスポンシブ対応（スマホ・タブレット）
+   ============================== */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px; /* 基本フォントサイズを調整（読みやすさ重視） */
+    line-height: 1.6; /* 行間を少し広げて可読性向上 */
+    overflow-x: hidden; /* 横スクロールを防止（要素がはみ出しても横に動かない） */
+  }
+
+  header h1 {
+    font-size: 1.5rem; /* ヘッダータイトルのフォントを小さくする（画面幅に合わせて） */
+  }
+
+  .nav-menu {
+    position: fixed; /* メニューを画面上に固定表示（ハンバーガーメニュー用） */
+    top: 60px; /* ヘッダー下から60pxの位置に配置 */
+    right: 10px; /* 右端から少し内側に寄せる */
+    background-color: rgba(0, 0, 0, 0.95); /* 背景は半透明の黒 */
+    padding: 1.2rem; /* 内側余白 */
+    border-radius: 10px; /* 角を丸くして見やすく */
+    z-index: 10000; /* 他の要素よりも最前面に表示 */
+    flex-direction: column; /* メニュー項目を縦並びに */
+    gap: 10px; /* 各項目の間隔を10pxに */
+    display: none; /* 初期は非表示（ハンバーガーメニューが押されたら表示） */
+    text-align: center; /* メニュー項目を中央揃えに */
+  }
+
+  .nav-menu.active {
+    display: flex; /* activeクラスがついたときに表示 */
+  }
+
+  .nav-menu li {
+    margin: 14px 0; /* 上下に間隔を確保 */
+    padding: 10px 16px; /* 内側に余白を確保 */
+    line-height: 1.8; /* 行の高さを広めに */
+    font-size: 1rem; /* フォントサイズ調整 */
+  }
+
+  .hamburger {
+    display: block; /* ハンバーガーメニューを表示 */
+  }
+
+  .main-visual {
+    background-size: cover; /* 背景画像が全体に表示されるように */
+    background-position: center; /* 背景の位置を中央に */
+  }
+}
+
+/* スマホ用：ホーム画面タイトルとアニメ要素の調整 */
+@media screen and (max-width: 768px) {
+  .home-title,
+  .fade-in {
+    font-size: 1.2rem; /* 小さめフォントサイズに調整 */
+    padding: 0.5rem 1rem; /* 余白を内側に追加して読みやすく */
+    text-align: center; /* テキストを中央寄せ */
+    word-break: break-word; /* 単語の途中でも折り返しを許可（レイアウト崩れ防止） */
+  }
+
+ /* ---------------------------------------
+   スマホ表示：お知らせ欄の見た目と配置調整
+------------------------------------------ */
+@media screen and (max-width: 768px) {
+  .news-frame {
+    width: 90%;              /* 横幅を画面の90%に調整 */
+    left: 5%;                /* 左右中央寄せ */
+    font-size: 0.95rem;      /* 全体フォント少し小さめ */
+    padding: 1rem;           /* 内側余白 */
+    max-height: 200px;       /* 縦方向スクロールの最大高さ */
+  }
+
+  .news-frame .news-list li {
+    font-size: 0.9rem;       /* 各お知らせの文字サイズ */
+    line-height: 1.5;        /* 行間をやや広めにして読みやすく */
+  }
+}
+
+/* ---------------------------------------
+   スマホ表示：お知らせ欄を通常表示に変更
+------------------------------------------ */
+@media screen and (max-width: 768px) {
+  .news-frame {
+    position: static !important;         /* 固定表示を解除して通常の位置に */
+    width: 95%;                          /* 幅をほぼ画面いっぱいに */
+    margin: 2rem auto;                   /* 上下余白＋中央寄せ */
+    background: #fff;                    /* 白背景で視認性向上 */
+    color: #000;                         /* 文字色は黒 */
+    border: 1px solid #ccc;              /* 枠線を追加 */
+    border-radius: 8px;                  /* 角を丸める */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* やや浮かせた影を付ける */
+  }
+}
+
+/* ---------------------------------------
+   スマホ表示：最大幅制限と操作性最適化
+------------------------------------------ */
+@media screen and (max-width: 768px) {
+  .news-frame {
+    max-width: 360px;                    /* 最大横幅を360pxまでに制限 */
+  }
+
+  html, body {
+    touch-action: manipulation;         /* タップによる拡大や選択などの暴発を防ぐ */
+  }
+}
+
+/* ---------------------------------------
+   全体共通：iOSの文字自動拡大防止設定
+------------------------------------------ */
+html {
+  -webkit-text-size-adjust: 100%;       /* Safari用 */
+  -ms-text-size-adjust: 100%;           /* IE用 */
+  text-size-adjust: 100%;               /* 標準仕様 */
+}
+
+/* ---------------------------------------
+   スマホ表示：背景画像の拡大バグ防止
+------------------------------------------ */
+@media screen and (max-width: 768px) {
+  body.home-bg {
+    background-attachment: scroll !important; /* iOSの背景画像拡大バグを防止 */
+  }
+}
+
+/* ---------------------------------------
+   スマホ用：ロゴのサイズ・文字間調整
+------------------------------------------ */
+@media screen and (max-width: 768px) {
+  .logo {
+    font-size: 2rem;           /* スマホでは少し小さめに */
+    letter-spacing: 1px;       /* 文字間を狭くして収まりやすく */
+  }
+}
+
+
+/* ---------------------------------------
+------------------------------------------ */
+  font-display: swap;
+}
+
+/* ---------------------------------------
+   ロゴ部分の共通スタイル
+------------------------------------------ */
+.logo {
+  font-size: 3rem;
+  color: white;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+
+/* 毛筆フォントだけを適用（font-familyのみ上書き） */
+.kikougyou-logo {
+}
+
+/* オリジナルフォント定義：桜鴬フォント */
+@font-face {
+  font-family: 'OunenFont';
+  src: url('../fonts/Ounen-mouhitsu.otf') format('opentype');
+  font-display: swap;
+}
+
+/* ロゴ文字への適用 */
+.logo.kikougyou-logo {
+  font-family: 'OunenFont', sans-serif !important;
+}
+/* ---------------------------------------
+   スクロール位置の調整（ヘッダーずれ防止）
+------------------------------------------ */
+html {
+  scroll-padding-top: 80px;
+}
+
+
+/* グリッドメニュー用 */
+.grid-nav {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: #ccc;
+  text-align: center;
+}
+.grid-nav a {
+  display: block;
+  padding: 1.2rem;
+  background: #333;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.grid-nav a:hover {
+  background: #555;
+}
+
+/* ロゴ折り返し防止 */
+.logo {
+  white-space: nowrap;
+  font-size: clamp(1.4rem, 6vw, 2.5rem);
+}
