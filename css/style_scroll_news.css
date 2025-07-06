@@ -29,16 +29,19 @@ header {
   letter-spacing: 1px; /* 文字間隔を少し広くして読みやすく */
 }
 
+.nav-menu {
   list-style: none; /* liの前の黒丸を消す */
   display: flex; /* メニューを横並びにする */
   gap: 1rem; /* 各メニューの間に1remのスペースを作る */
   margin: 0; /* 上下の余白を消去 */
 }
 
+.nav-menu li a {
   color: white; /* リンク文字を白に */
   text-decoration: none; /* 下線を消す */
 }
 
+.hamburger {
   display: none; /* デフォルトでは非表示（スマホ用表示切替などで使う） */
   font-size: 2rem; /* ハンバーガーアイコンのサイズ */
   cursor: pointer; /* カーソルを「ポインタ」に（クリックできる感を出す） */
@@ -164,6 +167,7 @@ body.home-bg {
     font-size: 1.5rem; /* ヘッダータイトルのフォントを小さくする（画面幅に合わせて） */
   }
 
+  .nav-menu {
     position: fixed; /* メニューを画面上に固定表示（ハンバーガーメニュー用） */
     top: 60px; /* ヘッダー下から60pxの位置に配置 */
     right: 10px; /* 右端から少し内側に寄せる */
@@ -177,15 +181,18 @@ body.home-bg {
     text-align: center; /* メニュー項目を中央揃えに */
   }
 
+  .nav-menu.active {
     display: flex; /* activeクラスがついたときに表示 */
   }
 
+  .nav-menu li {
     margin: 14px 0; /* 上下に間隔を確保 */
     padding: 10px 16px; /* 内側に余白を確保 */
     line-height: 1.8; /* 行の高さを広めに */
     font-size: 1rem; /* フォントサイズ調整 */
   }
 
+  .hamburger {
     display: block; /* ハンバーガーメニューを表示 */
   }
 
@@ -317,29 +324,4 @@ html {
 ------------------------------------------ */
 html {
   scroll-padding-top: 80px;
-}
-
-.grid-menu {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: #ccc;
-  margin: 0;
-}
-.grid-menu a {
-  display: block;
-  padding: 1.2rem;
-  background: #333;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  font-size: 1rem;
-}
-.grid-menu a:hover {
-  background: #555;
-}
-.logo {
-  font-size: clamp(1.5rem, 6vw, 2.5rem);
-  font-weight: bold;
-  white-space: nowrap;
 }
